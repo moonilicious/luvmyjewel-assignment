@@ -466,134 +466,110 @@ h1 {
 }
 
 .dropdown-section {
-  margin-bottom: 1.5rem;
+  display: none;
+}
+
+.letter-blocks-container {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1.2rem 0 2rem 0;
+  justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
+  min-height: 60px;
 }
 
-label {
-  font-weight: 600;
-  font-size: 1.1rem;
+.letter-block {
+  width: 44px;
+  height: 44px;
+  background: var(--icon-bg);
   color: var(--dark-text);
-}
-
-select {
-  padding: 0.7rem 1rem;
-  font-size: 1rem;
   border: 2px solid var(--primary-gold);
-  background-color: var(--card-background);
-  color: var(--dark-text);
-  border-radius: 8px;
-  appearance: none; /* Remove default arrow */
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23b38a3d%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.5H18.4c-4.9%200-9.2%202.1-12.4%205.6-3.1%203.5-4.4%208-3.9%2012.6l139.3%20182.9c0.7%200.9%201.8%201.4%202.8%201.4s2.1-.5%202.8-1.4l139.3-182.9c0.7-0.9%201.1-2%201.1-3.2%200-1.2-.4-2.3-1.1-3.2z%22%2F%3E%3C%2Fsvg%3E');
-  background-repeat: no-repeat;
-  background-position: right 10px top 50%;
-  background-size: 12px auto;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
-
-select:focus {
-  outline: none;
-  border-color: var(--secondary-gold);
-  box-shadow: 0 0 0 3px rgba(179, 138, 61, 0.3);
-}
-
-.buttons {
-  margin: 2.5rem 0;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.btn {
-  padding: 1rem 2rem;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 50px; /* Pill shape */
-  font-size: 1.1rem;
+  border-radius: 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.add-to-bag {
-  background-color: var(--primary-gold);
-  color: var(--button-text-light);
-}
-
-.add-to-bag:hover {
-  background-color: var(--secondary-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.add-to-wishlist {
-  background-color: var(--button-bg-light);
-  border: 2px solid var(--button-border-light);
-  color: var(--button-text-light);
-}
-
-.add-to-wishlist:hover {
-  background-color: var(--button-hover-bg-light);
-  color: var(--dark-mode-button-hover-text); /* Use dark mode text for hover */
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-body.dark-mode .add-to-bag {
-  color: #1a1a1a;
-}
-
-body.dark-mode .add-to-wishlist {
-  background-color: var(--dark-mode-button-bg);
-  border-color: var(--dark-mode-button-border);
-  color: var(--dark-mode-button-text);
-}
-
-body.dark-mode .add-to-wishlist:hover {
-  background-color: var(--dark-mode-button-hover-bg);
-  color: var(--dark-mode-button-hover-text);
-}
-
-
-.product-details-section {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px dashed var(--border-dashed);
-  transition: border-color 0.5s ease;
-}
-
-.product-description {
-  line-height: 1.8;
-  color: var(--dark-text);
-  font-size: 1rem;
-  margin-bottom: 2rem; /* Add space below description */
-}
-
-h2, h3 {
+  justify-content: center;
   font-family: 'Playfair Display', serif;
-  color: var(--dark-text);
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  position: relative;
-  padding-left: 15px;
+  cursor: pointer;
+  transition: 
+    background 0.2s, 
+    color 0.2s, 
+    border-color 0.2s, 
+    box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  user-select: none;
 }
 
-h2::before, h3::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 5px;
-  height: 80%;
-  background-color: var(--primary-gold);
-  border-radius: 2px;
+.letter-block.selected,
+.letter-block:focus {
+  background: var(--primary-gold);
+  color: #fff;
+  border-color: var(--secondary-gold);
+  box-shadow: 0 4px 16px rgba(179,138,61,0.13);
+  outline: none;
+}
+
+.letter-block:hover:not(.selected) {
+  background: var(--secondary-gold);
+  color: #fff;
+  border-color: var(--primary-gold);
+}
+
+body.dark-mode .letter-block {
+  background: var(--icon-bg);
+  color: var(--dark-mode-text);
+  border-color: var(--primary-gold);
+}
+
+body.dark-mode .letter-block.selected,
+body.dark-mode .letter-block:focus {
+  background: var(--primary-gold);
+  color: #1a1a1a;
+  border-color: var(--secondary-gold);
+}
+
+body.dark-mode .letter-block:hover:not(.selected) {
+  background: var(--secondary-gold);
+  color: #1a1a1a;
+  border-color: var(--primary-gold);
+}
+
+/* New styles for unavailable letter blocks */
+.letter-block.unavailable {
+  background: #ececec;
+  color: #b0b0b0;
+  border-color: #e0e0e0;
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+body.dark-mode .letter-block.unavailable {
+  background: #232323;
+  color: #555;
+  border-color: #232323;
+  opacity: 0.4;
+}
+
+/* Responsive: fit more blocks per row on small screens */
+@media (max-width: 768px) {
+  .letter-blocks-container {
+    gap: 0.5rem;
+  }
+  .letter-block {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+}
+
+/* Animation for letter blocks */
+.animated-letter-blocks {
+  animation: fadeIn 1.2s ease-out;
 }
 
 /* --- NEW CARD STYLES --- */
@@ -809,7 +785,43 @@ h2::before, h3::before {
 .animated-buttons .btn { animation: scaleIn 1.5s ease-out; }
 .animated-subheading { animation: fadeIn 1.6s ease-out; }
 
+.add-to-bag {
+  background-color: var(--primary-gold);
+  color: var(--button-text-light);
+}
 
+.add-to-bag:hover {
+  background-color: var(--secondary-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.add-to-wishlist {
+  background-color: var(--button-bg-light);
+  border: 2px solid var(--button-border-light);
+  color: var(--button-text-light);
+}
+
+.add-to-wishlist:hover {
+  background-color: var(--button-hover-bg-light);
+  color: var(--dark-mode-button-hover-text); /* Use dark mode text for hover */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+body.dark-mode .add-to-bag {
+  color: #1a1a1a;
+}
+
+body.dark-mode .add-to-wishlist {
+  background-color: var(--dark-mode-button-bg);
+  border-color: var(--dark-mode-button-border);
+  color: var(--dark-mode-button-text);
+}
+
+body.dark-mode .add-to-wishlist:hover {
+  background-color: var(--dark-mode-button-hover-bg);
+  color: var(--dark-mode-button-hover-text);
+}
 /* Animation for new cards and boxes */
 .animated-card, .animated-box {
   animation: fadeIn 0.8s ease-out forwards; /* Use fadeIn with translateY */
@@ -832,6 +844,25 @@ h2::before, h3::before {
 .animate-in {
     opacity: 1 !important; /* Force visibility after animation starts */
     transform: translateY(0) !important; /* Reset any transform applied initially for hiding */
+}
+.buttons {
+  margin: 2.5rem 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 50px; /* Pill shape */
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 
@@ -867,6 +898,10 @@ h2::before, h3::before {
     margin-left: 0;
     margin-right: auto;
     justify-content: flex-start; /* Ensure left alignment on smaller screens too */
+  }
+  .image-preview-container {
+    width: 50%; /* Adjust font size for smaller screens */
+    height: 50%;
   }
 }
 

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const dropdown = document.getElementById('letterDropdown');
+  // const dropdown = document.getElementById('letterDropdown');
   const mainImage = document.getElementById('jewelryImage');
   const modal = document.getElementById('modal');
   const modalImage = document.getElementById('modalImage');
@@ -30,29 +30,62 @@ document.addEventListener('DOMContentLoaded', () => {
     darkModeToggle.checked = false; // Ensure it's unchecked for light mode
   }
 
-  // --- Populate Dropdown ---
+  // --- Letter Block Selector Logic ---
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  const unavailableLetters = ['b','e','i','l','n','q','u','v','w','x'];
+  const letterBlocksContainer = document.getElementById('letterBlocksContainer');
+  let selectedLetter = 'a';
 
-  // Populate dropdown A-Z
-  letters.forEach(letter => {
-    const option = document.createElement('option');
-    option.value = letter.toLowerCase();
-    option.textContent = letter;
-    dropdown.appendChild(option);
-  });
+  // Helper to create letter blocks
+  function createLetterBlocks() {
+    letterBlocksContainer.innerHTML = '';
+    letters.forEach(letter => {
+      const lower = letter.toLowerCase();
+      const block = document.createElement('div');
+      block.className = 'letter-block';
+      block.tabIndex = 0;
+      block.textContent = letter;
+      block.setAttribute('data-letter', lower);
+
+      if (unavailableLetters.includes(lower)) {
+        block.classList.add('unavailable');
+        block.tabIndex = -1;
+        // No click or keyboard event for unavailable
+      } else {
+        if (lower === selectedLetter) {
+          block.classList.add('selected');
+        }
+        // Click event
+        block.addEventListener('click', () => {
+          selectLetter(lower);
+        });
+        // Keyboard accessibility
+        block.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectLetter(lower);
+          }
+        });
+      }
+      letterBlocksContainer.appendChild(block);
+    });
+  }
+
+  function selectLetter(letter) {
+    selectedLetter = letter;
+    // Update selected class
+    Array.from(letterBlocksContainer.children).forEach(block => {
+      block.classList.toggle('selected', block.getAttribute('data-letter') === letter);
+    });
+    updateProductImage(letter);
+    playChime();
+  }
 
   // Set default value to A and update image
-  dropdown.value = 'a';
-  updateProductImage('a'); // Set initial image
+  createLetterBlocks();
+  updateProductImage(selectedLetter);
 
   // --- Event Listeners ---
-
-  // Handle dropdown change
-  dropdown.addEventListener('change', () => {
-    const selectedLetter = dropdown.value;
-    updateProductImage(selectedLetter);
-    playChime();
-  });
 
   // Handle main image click for modal
   imagePreviewContainer.addEventListener('click', () => {
