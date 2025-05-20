@@ -1,0 +1,953 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+:root {
+  /* Light Mode Colors */
+  --primary-gold: #b38a3d; /* A warm gold tone */
+  --secondary-gold: #d4af37; /* Brighter gold for accents */
+  --dark-text: #2c3e50; /* Darker text for contrast */
+  --light-text: #7f8c8d; /* Lighter text for secondary info */
+  --background-light: #fdfaf6; /* Soft, warm background */
+  --card-background: #ffffff;
+  --nav-background: #000;
+  --button-text-light: #ffffff;
+  --button-border-light: var(--primary-gold);
+  --button-bg-light: var(--primary-gold);
+  --button-hover-bg-light: var(--secondary-gold);
+  --border-dashed: rgba(0, 0, 0, 0.1);
+  --modal-bg: rgba(0, 0, 0, 0.9);
+  --modal-close-color: #f1f1f1;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --card-border: 1px solid rgba(0, 0, 0, 0.05);
+  --icon-bg: #f5f5f5; /* Background for icons in cards */
+  --icon-color: var(--primary-gold);
+
+
+  /* Dark Mode Colors (will be applied via .dark-mode class) */
+  --dark-mode-bg: #1a1a1a;
+  --dark-mode-card-bg: #2c2c2c;
+  --dark-mode-text: #e0e0e0;
+  --dark-mode-light-text: #b0b0b0;
+  --dark-mode-nav-bg: #0d0d0d;
+  --dark-mode-button-text: var(--primary-gold);
+  --dark-mode-button-bg: transparent;
+  --dark-mode-button-border: var(--primary-gold);
+  --dark-mode-button-hover-bg: var(--primary-gold);
+  --dark-mode-button-hover-text: #1a1a1a;
+  --dark-mode-border-dashed: rgba(255, 255, 255, 0.1);
+  --dark-mode-modal-bg: rgba(0, 0, 0, 0.95);
+  --dark-mode-modal-close-color: #f1f1f1;
+  --dark-mode-card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  --dark-mode-card-border: 1px solid rgba(255, 255, 255, 0.05);
+  --dark-mode-icon-bg: #3a3a3a; /* Background for icons in cards in dark mode */
+  --dark-mode-icon-color: var(--primary-gold);
+
+
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.5s;
+}
+
+/* Dark Mode specific variables */
+body.dark-mode {
+  --background-light: var(--dark-mode-bg);
+  --card-background: var(--dark-mode-card-bg);
+  --dark-text: var(--dark-mode-text);
+  --light-text: var(--dark-mode-light-text);
+  --nav-background: var(--dark-mode-nav-bg);
+  --button-text-light: var(--dark-mode-button-text);
+  --button-bg-light: var(--dark-mode-button-bg);
+  --button-border-light: var(--dark-mode-button-border);
+  --button-hover-bg-light: var(--dark-mode-button-hover-bg);
+  --border-dashed: var(--dark-mode-border-dashed);
+  --modal-bg: var(--dark-mode-modal-bg);
+  --modal-close-color: var(--dark-mode-modal-close-color);
+  --card-shadow: var(--dark-mode-card-shadow);
+  --card-border: var(--dark-mode-card-border);
+  --icon-bg: var(--dark-mode-icon-bg);
+  --icon-color: var(--dark-mode-icon-color);
+  color: var(--dark-mode-text);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--background-light);
+  color: var(--dark-text);
+  overflow-x: hidden; /* Prevent horizontal scroll from animations */
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Global Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInFromLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Bokeh Background */
+.bokeh-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at top left, rgba(255, 200, 0, 0.1), transparent 50%),
+              radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.1), transparent 50%),
+              radial-gradient(circle at center, rgba(255, 223, 0, 0.05), transparent 70%);
+  overflow: hidden;
+}
+
+/* Create the 'dust' particles */
+.bokeh-background::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 60%) 0% 0% / 150px 150px no-repeat,
+    radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%) 10% 20% / 100px 100px no-repeat,
+    radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 60%) 20% 40% / 200px 200px no-repeat,
+    radial-gradient(circle at 60% 10%, rgba(255, 255, 255, 0.25) 0%, transparent 60%) 30% 60% / 120px 120px no-repeat,
+    radial-gradient(circle at 40% 90%, rgba(255, 255, 255, 0.08) 0%, transparent 60%) 40% 80% / 180px 180px no-repeat;
+  background-size: 150px 150px, 100px 100px, 200px 200px, 120px 120px, 180px 180px;
+  animation: moveBokeh 30s linear infinite alternate; /* Slower, oscillating movement */
+  opacity: 0.7;
+}
+
+body.dark-mode .bokeh-background::before {
+    background:
+    radial-gradient(circle at 10% 20%, rgba(255, 223, 0, 0.1) 0%, transparent 60%) 0% 0% / 150px 150px no-repeat,
+    radial-gradient(circle at 80% 50%, rgba(255, 223, 0, 0.08) 0%, transparent 60%) 10% 20% / 100px 100px no-repeat,
+    radial-gradient(circle at 30% 70%, rgba(255, 223, 0, 0.05) 0%, transparent 60%) 20% 40% / 200px 200px no-repeat,
+    radial-gradient(circle at 60% 10%, rgba(255, 223, 0, 0.12) 0%, transparent 60%) 30% 60% / 120px 120px no-repeat,
+    radial-gradient(circle at 40% 90%, rgba(255, 223, 0, 0.04) 0%, transparent 60%) 40% 80% / 180px 180px no-repeat;
+}
+
+
+@keyframes moveBokeh {
+  0% { background-position: 0% 0%, 10% 20%, 20% 40%, 30% 60%, 40% 80%; }
+  100% { background-position: 100% 100%, 90% 80%, 80% 60%, 70% 40%, 60% 20%; }
+}
+
+
+/* Dark Mode Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-left: 1rem;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-gold); /* Gold for dark mode */
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primary-gold);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Navigation Bar */
+nav {
+  background-color: var(--nav-background);
+  color: white;
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  animation: fadeIn 1s ease-out;
+  transition: background-color 0.5s ease;
+}
+
+nav .logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--primary-gold);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+nav ul {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1.05rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 5px;
+  right: 0;
+  background: var(--secondary-gold);
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: var(--primary-gold);
+  transform: translateY(-2px);
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+  left: 0;
+  background: var(--secondary-gold);
+}
+
+.nav-icons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-icons i {
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  color: white; /* Ensure icons are white in light mode nav */
+}
+
+body.dark-mode .nav-icons i {
+  color: var(--dark-mode-text);
+}
+
+
+.nav-icons i:hover {
+  color: var(--primary-gold);
+  transform: scale(1.1);
+}
+
+/* Parallax Section */
+.parallax-section {
+  height: 300px; /* Increased height for more impact */
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/parallax-bg.jpg') no-repeat center center/cover;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
+}
+
+.parallax-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  animation: shimmer 20s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+.parallax-content {
+  z-index: 1;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  animation: scaleIn 1.5s ease-out;
+}
+
+.parallax-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.parallax-content p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-top: 0;
+}
+
+
+/* Main Container */
+.container {
+  display: flex;
+  padding: 4rem;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  background-color: var(--card-background);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  animation: fadeIn 1s ease-in-out;
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Product Gallery (Image Side) */
+.product-gallery {
+  flex: 1.5; /* Increased flex to take more space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.image-preview-container {
+  width: 100%;
+  max-width: 650px; /* Increased max-width */
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.image-preview-container:hover {
+  transform: translateY(-5px);
+}
+
+.image-preview-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.zoom-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); /* Invisible initially */
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.image-preview-container:hover .zoom-overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Info Section (Text Side) */
+.info {
+  flex: 1; /* Slightly reduced or kept the same */
+  padding-left: 2rem;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  color: var(--dark-text);
+  line-height: 1.2;
+}
+
+.brand {
+  color: var(--light-text);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--primary-gold);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: baseline;
+}
+
+.current-price {
+  color: var(--light-text);
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-left: 15px;
+  text-decoration: line-through; /* Strikethrough for old price */
+}
+
+.stock-info {
+  color: #c0392b; /* Red for low stock */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.viewer-count, .return-policy, .seller-info {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: var(--light-text);
+}
+
+.viewer-count i, .return-policy i, .seller-info i {
+  margin-right: 8px;
+  color: var(--primary-gold);
+}
+
+.dropdown-section {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--dark-text);
+}
+
+select {
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--primary-gold);
+  background-color: var(--card-background);
+  color: var(--dark-text);
+  border-radius: 8px;
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23b38a3d%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.5H18.4c-4.9%200-9.2%202.1-12.4%205.6-3.1%203.5-4.4%208-3.9%2012.6l139.3%20182.9c0.7%200.9%201.8%201.4%202.8%201.4s2.1-.5%202.8-1.4l139.3-182.9c0.7-0.9%201.1-2%201.1-3.2%200-1.2-.4-2.3-1.1-3.2z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 12px auto;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--secondary-gold);
+  box-shadow: 0 0 0 3px rgba(179, 138, 61, 0.3);
+}
+
+.buttons {
+  margin: 2.5rem 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 50px; /* Pill shape */
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.add-to-bag {
+  background-color: var(--primary-gold);
+  color: var(--button-text-light);
+}
+
+.add-to-bag:hover {
+  background-color: var(--secondary-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.add-to-wishlist {
+  background-color: var(--button-bg-light);
+  border: 2px solid var(--button-border-light);
+  color: var(--button-text-light);
+}
+
+.add-to-wishlist:hover {
+  background-color: var(--button-hover-bg-light);
+  color: var(--dark-mode-button-hover-text); /* Use dark mode text for hover */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .add-to-bag {
+  color: #1a1a1a;
+}
+
+body.dark-mode .add-to-wishlist {
+  background-color: var(--dark-mode-button-bg);
+  border-color: var(--dark-mode-button-border);
+  color: var(--dark-mode-button-text);
+}
+
+body.dark-mode .add-to-wishlist:hover {
+  background-color: var(--dark-mode-button-hover-bg);
+  color: var(--dark-mode-button-hover-text);
+}
+
+
+.product-details-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px dashed var(--border-dashed);
+  transition: border-color 0.5s ease;
+}
+
+.product-description {
+  line-height: 1.8;
+  color: var(--dark-text);
+  font-size: 1rem;
+  margin-bottom: 2rem; /* Add space below description */
+}
+
+h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--dark-text);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  position: relative;
+  padding-left: 15px;
+}
+
+h2::before, h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 80%;
+  background-color: var(--primary-gold);
+  border-radius: 2px;
+}
+
+/* --- NEW CARD STYLES --- */
+
+/* Grid for Helpful Info cards */
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  /* ALIGN ITEMS TO THE LEFT */
+  justify-content: flex-start;
+  /* Removed max-width for left alignment to allow it to take available space */
+  margin-left: 0; /* Align the grid container itself to the left */
+  margin-right: auto; /* Push any remaining space to the right */
+}
+
+.info-card {
+  background-color: var(--card-background);
+  border: var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0; /* Initial hidden state for animation */
+  transform: translateY(20px); /* Initial offset for animation */
+}
+
+.info-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--icon-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  transition: background-color 0.5s ease;
+}
+
+.card-icon i {
+  font-size: 1.8rem;
+  color: var(--icon-color);
+  transition: color 0.5s ease;
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--dark-text);
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+  font-weight: 700;
+}
+
+.info-card p {
+  font-size: 0.95rem;
+  color: var(--light-text);
+  line-height: 1.6;
+}
+
+/* Two-point info containers (for Shipping & Returns, Gift Options) */
+.two-point-info-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust min-width as needed */
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  /* ALIGN ITEMS TO THE LEFT */
+  justify-content: flex-start;
+  /* Removed max-width for left alignment */
+  margin-left: 0; /* Align the grid container itself to the left */
+  margin-right: auto; /* Push any remaining space to the right */
+}
+
+.two-point-box {
+  background-color: var(--card-background);
+  border: var(--card-border);
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text to start */
+  opacity: 0; /* Initial hidden state for animation */
+  transform: translateY(20px); /* Initial offset for animation */
+}
+
+.two-point-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.box-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--icon-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+  transition: background-color 0.5s ease;
+}
+
+.box-icon i {
+  font-size: 1.5rem;
+  color: var(--icon-color);
+  transition: color 0.5s ease;
+}
+
+.box-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--dark-text);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.two-point-box p {
+  font-size: 0.9rem;
+  color: var(--light-text);
+  line-height: 1.6;
+}
+
+/* --- END NEW CARD STYLES --- */
+
+
+.reviews {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--light-text);
+}
+
+.write-review-link {
+  color: var(--primary-gold);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.write-review-link:hover {
+  color: var(--secondary-gold);
+  text-decoration: underline;
+}
+
+/* Modal for Image Preview */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: var(--modal-bg);
+  animation: fadeIn 0.3s ease-out;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease;
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+  animation: scaleIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bounce effect */
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: var(--modal-close-color);
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: var(--primary-gold);
+  text-decoration: none;
+  transform: rotate(90deg);
+}
+
+/* Animations for specific elements */
+.animated-nav { animation: fadeIn 0.8s ease-out; }
+.animated-image { animation: slideInFromLeft 1s ease-out; }
+.animated-info { animation: slideInFromRight 1s ease-out; }
+.animated-heading { animation: fadeIn 1.2s ease-out; }
+.animated-text { animation: fadeIn 1.3s ease-out; }
+.animated-label, .animated-dropdown { animation: fadeIn 1.4s ease-out; }
+.animated-buttons .btn { animation: scaleIn 1.5s ease-out; }
+.animated-subheading { animation: fadeIn 1.6s ease-out; }
+
+
+/* Animation for new cards and boxes */
+.animated-card, .animated-box {
+  animation: fadeIn 0.8s ease-out forwards; /* Use fadeIn with translateY */
+  opacity: 0; /* Hidden by default */
+  transform: translateY(20px); /* Slightly down by default */
+}
+.info-cards-grid .animated-card:nth-child(1) { animation-delay: 0.1s; }
+.info-cards-grid .animated-card:nth-child(2) { animation-delay: 0.2s; }
+.info-cards-grid .animated-card:nth-child(3) { animation-delay: 0.3s; }
+.info-cards-grid .animated-card:nth-child(4) { animation-delay: 0.4s; }
+.info-cards-grid .animated-card:nth-child(5) { animation-delay: 0.5s; }
+.info-cards-grid .animated-card:nth-child(6) { animation-delay: 0.6s; }
+/* Add more if you have more cards */
+
+.two-point-info-container .animated-box:nth-child(1) { animation-delay: 0.1s; }
+.two-point-info-container .animated-box:nth-child(2) { animation-delay: 0.2s; }
+
+
+/* The 'animate-in' class is what reveals them */
+.animate-in {
+    opacity: 1 !important; /* Force visibility after animation starts */
+    transform: translateY(0) !important; /* Reset any transform applied initially for hiding */
+}
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    padding: 2rem;
+    margin: 1rem auto;
+    gap: 2rem;
+  }
+
+  .info {
+    padding-left: 0;
+  }
+
+  .product-gallery, .image-preview-container {
+    max-width: 100%; /* Ensure full width on smaller screens */
+  }
+
+  .parallax-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .parallax-content p {
+    font-size: 1.2rem;
+  }
+
+  .info-cards-grid, .two-point-info-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Reset max-width and ensure left alignment for smaller screens */
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: auto;
+    justify-content: flex-start; /* Ensure left alignment on smaller screens too */
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  nav ul {
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .nav-icons {
+    margin-top: 1rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .price {
+    font-size: 1.7rem;
+  }
+
+  .current-price {
+    font-size: 1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-content {
+    max-width: 95%;
+  }
+
+  .info-cards-grid, .two-point-info-container {
+    grid-template-columns: 1fr; /* Stack on small screens */
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: auto;
+    justify-content: flex-start; /* Ensure left alignment when stacked */
+  }
+}
+
+@media (max-width: 480px) {
+  .parallax-section {
+    height: 200px;
+  }
+
+  .parallax-content h1 {
+    font-size: 2rem;
+  }
+
+  .parallax-content p {
+    font-size: 1rem;
+  }
+
+  nav ul li a {
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .price {
+    font-size: 1.5rem;
+  }
+}
