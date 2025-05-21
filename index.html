@@ -1,149 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bubble Initial Necklace - JEWELRY</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Initial Pendant Necklace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <header class="header">
+        <div class="header-left">
+            <a href="#" class="logo">LUVMYJEWELRY</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products or brands">
+                <button type="submit">🔍</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="#">Sign In</a>
+            <a href="#"><i class="fas fa-shopping-bag"></i> Bag</a>
+            <button id="theme-toggle" class="theme-toggle" title="Switch to Light Mode"><i class="fas fa-moon"></i></button>
+        </div>
+    </header>
 
-  <div class="bokeh-background"></div>
-
-  <nav class="animated-nav">
-    <div class="logo">JEWELRY</div>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Shop</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <div class="nav-icons">
-      <i class="fas fa-search"></i>
-      <i class="fas fa-user"></i>
-      <i class="fas fa-shopping-bag"></i>
-      <label class="switch">
-        <input type="checkbox" id="darkModeToggle">
-        <span class="slider round"></span>
-      </label>
-    </div>
-  </nav>
-
-
-  <main class="container">
-    <div class="product-gallery">
-      <div class="image-preview-container">
-        <img id="jewelryImage" src="images/a.png" alt="Bubble Initial Necklace for A" class="animated-image" />
-        <div class="zoom-overlay" title="Click to zoom"></div>
-      </div>
-    </div>
-
-    <div class="info animated-info">
-      <h1 class="animated-heading">Bubble Initial Necklace</h1>
-      <p class="brand animated-text">Petit Moments</p>
-      <p class="price animated-text">₹ 2,461.73 <span class="current-price">Current Price ₹ 2,461.73</span></p>
-      <p class="stock-info animated-text"><strong>Color:</strong> Gold - Z Only 2 left</p>
-      <p class="viewer-count animated-text"><i class="fas fa-eye"></i> 2 people are viewing</p>
-      <p class="return-policy animated-text"><i class="fas fa-undo-alt"></i> Free returns anytime</p>
-      <p class="seller-info animated-text"><strong>Sold by Nordstrom</strong></p>
-
-      <!-- Letter Selector Blocks Start -->
-      <div class="letter-blocks-container animated-letter-blocks" id="letterBlocksContainer">
-        <!-- JS will populate letter blocks here -->
-      </div>
-      <!-- Letter Selector Blocks End -->
-
-      <div class="buttons animated-buttons">
-        <button class="btn add-to-bag">
-          <i class="fas fa-shopping-bag"></i> Add to Bag
+    <nav class="nav-menu">
+        <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle Navigation">
+            <i class="fas fa-bars"></i>
         </button>
-        <button class="btn add-to-wishlist">
-          <i class="fas fa-heart"></i> Add to Wishlist
-        </button>
-      </div>
+        <ul class="nav-list" id="nav-list">
+            <li><a href="#">New</a></li>
+            <li><a href="#">Sale</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Beauty</a></li>
+            <li><a href="#">Shoes</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Kids</a></li>
+            <li><a href="#">Designer</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Gifts</a></li>
+            <li><a href="#">Explore</a></li>
+        </ul>
+    </nav>
 
-      <div class="product-details-section">
-        <h2 class="animated-subheading">Details & Care</h2>
-        <p class="product-description animated-text">
-          Add a little personal flair to your neckline with this puffy initial pendant plated in warm goldtone. Each letter is crafted with meticulous attention to detail, ensuring a unique and elegant piece that reflects your individuality. Perfect for daily wear or as a thoughtful gift.
-        </p>
-
-        <h3 class="animated-subheading">Helpful Info</h3>
-        <div class="info-cards-grid">
-          <div class="info-card animated-card">
-            <div class="card-icon"><i class="fas fa-ruler"></i></div>
-            <h4 class="card-title">Fit Guides</h4>
-            <p>Explore our comprehensive necklace length guide in the footer to accurately visualize how different lengths will drape on your neckline. Measure a favorite necklace for comparison.</p>
-          </div>
-          <div class="info-card animated-card">
-            <div class="card-icon"><i class="fas fa-tint-slash"></i></div>
-            <h4 class="card-title">Care Instructions</h4>
-            <p>To preserve radiant shine, avoid direct contact with water, perfumes, lotions, and harsh chemicals. Apply beauty products before putting on your necklace.</p>
-          </div>
-          <div class="info-card animated-card">
-            <div class="card-icon"><i class="fas fa-running"></i></div>
-            <h4 class="card-title">Activity Advisory</h4>
-            <p>We recommend removing your necklace prior to engaging in any physical activities, showering, swimming, or sleeping to prevent accidental damage or loss.</p>
-          </div>
-          <div class="info-card animated-card">
-            <div class="card-icon"><i class="fas fa-box-open"></i></div>
-            <h4 class="card-title">Storage Tips</h4>
-            <p>Store your necklace separately in a soft, dry pouch or a dedicated jewelry box. This prevents tangling and protects it from scratches and oxidation.</p>
-          </div>
-          <div class="info-card animated-card">
-            <div class="card-icon"><i class="fas fa-certificate"></i></div>
-            <h4 class="card-title">Authenticity Guarantee</h4>
-            <p>Each necklace comes with an official certificate of authenticity, guaranteeing its materials and craftsmanship for your peace of mind.</p>
-          </div>
-          <div class="info-card animated-card">
-            <div class="card-icon"><i class="fas fa-hand-sparkles"></i></div>
-            <h4 class="card-title">Hypoallergenic Material</h4>
-            <p>Crafted with hypoallergenic and nickel-free materials, making it suitable and comfortable for even the most sensitive skin types.</p>
-          </div>
-        </div>
-
-        <h3 class="animated-subheading">Shipping & Returns</h3>
-        <div class="two-point-info-container">
-          <div class="two-point-box animated-box">
-            <div class="box-icon"><i class="fas fa-truck"></i></div>
-            <h4 class="box-title">Free Standard Shipping</h4>
-            <p>Enjoy complimentary standard shipping on all domestic orders, typically delivered within 3-5 business days. Tracking information will be provided.</p>
-          </div>
-          <div class="two-point-box animated-box">
-            <div class="box-icon"><i class="fas fa-undo-alt"></i></div>
-            <h4 class="box-title">60-Day Free Returns</h4>
-            <p>We offer hassle-free returns within 60 days of purchase for a full refund or exchange. Items must be in original, unworn condition with packaging.</p>
-          </div>
-        </div>
-
-        <h3 class="animated-subheading">Gift Options</h3>
-        <div class="two-point-info-container">
-          <div class="two-point-box animated-box">
-            <div class="box-icon"><i class="fas fa-gifts"></i></div>
-            <h4 class="box-title">Luxury Gift Wrapping</h4>
-            <p>Elevate your gift with our exquisite premium gift wrapping service, available for a small fee at checkout, including a deluxe box and ribbon.</p>
-          </div>
-          <div class="two-point-box animated-box">
-            <div class="box-icon"><i class="fas fa-envelope-open-text"></i></div>
-            <h4 class="box-title">Personalized Gift Message</h4>
-            <p>Add a heartfelt, personalized message to your gift. This message will be sent to the recipient's email upon delivery, free of charge.</p>
-          </div>
-        </div>
-
-        <p class="reviews animated-text"><strong>Reviews</strong>: (0) No reviews yet – be the first! <a href="#" class="write-review-link">Write a review</a></p>
-      </div>
+    <div class="breadcrumb">
+        <a href="#">Home</a> &gt; <a href="#">Women</a> &gt; <a href="#">Jewelry</a> &gt; <a href="#">Necklaces</a>
     </div>
-  </main>
 
-  <div id="modal" class="modal">
-    <span class="close-button animated-close">&times;</span>
-    <img class="modal-content animated-modal-image" id="modalImage" alt="Zoomed Jewelry">
-  </div>
+    <main class="product-page">
+        <div class="product-images">
+            <div class="image-collage">
+                <div class="collage-item main-selected-initial">
+                    <img id="main-product-image" src="images/a.png" alt="Bubble Initial Pendant Necklace">
+                </div>
+                <div class="collage-item">
+                    <img src="images/constant img 1.png" alt="Alternate view of necklace">
+                </div>
+                <div class="collage-item">
+                    <img src="images/constant img 2.png" alt="Constant image 1">
+                </div>
+                <div class="collage-item video-item">
+                    <video controls muted loop playsinline autoplay preload="auto">
+                        <source src="images/constant img 3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
 
-  <audio id="chime" src="chime.mp3" preload="auto"></audio>
+        <div class="product-details">
+            <div class="product-title">
+                <h2 id="product-main-title">Bubble Initial Pendant Necklace</h2>
+                <span class="brand">luvmyjewelry</span>
+            </div>
+            <p class="price">Rs. 3,221.12</p>
 
-  <script src="script.js"></script>
+            <div class="color-options">
+                <p>Color: Gold <span id="selected-initial">A</span></p>
+                <div class="initial-selector">
+                    <div class="initial-thumb-wrapper selected" data-initial="a">
+                        <img src="images/a.png" alt="Initial A" class="initial-thumb">
+                        <span class="initial-text">A</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="b" title="Out of Stock">
+                        <img src="images/b.png" alt="Initial B" class="initial-thumb">
+                        <span class="initial-text">B</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="c">
+                        <img src="images/c.png" alt="Initial C" class="initial-thumb">
+                        <span class="initial-text">C</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="d">
+                        <img src="images/d.png" alt="Initial D" class="initial-thumb">
+                        <span class="initial-text">D</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="e" title="Out of Stock">
+                        <img src="images/e.png" alt="Initial E" class="initial-thumb">
+                        <span class="initial-text">E</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="f">
+                        <img src="images/f.png" alt="Initial F" class="initial-thumb">
+                        <span class="initial-text">F</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="g">
+                        <img src="images/g.png" alt="Initial G" class="initial-thumb">
+                        <span class="initial-text">G</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="h">
+                        <img src="images/h.png" alt="Initial H" class="initial-thumb">
+                        <span class="initial-text">H</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="i" title="Out of Stock">
+                        <img src="images/i.png" alt="Initial I" class="initial-thumb">
+                        <span class="initial-text">I</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="j">
+                        <img src="images/j.png" alt="Initial J" class="initial-thumb">
+                        <span class="initial-text">J</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="k">
+                        <img src="images/k.png" alt="Initial K" class="initial-thumb">
+                        <span class="initial-text">K</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="l" title="Out of Stock">
+                        <img src="images/l.png" alt="Initial L" class="initial-thumb">
+                        <span class="initial-text">L</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="m">
+                        <img src="images/m.png" alt="Initial M" class="initial-thumb">
+                        <span class="initial-text">M</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="n" title="Out of Stock">
+                        <img src="images/n.png" alt="Initial N" class="initial-thumb">
+                        <span class="initial-text">N</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="o">
+                        <img src="images/o.png" alt="Initial O" class="initial-thumb">
+                        <span class="initial-text">O</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="p">
+                        <img src="images/p.png" alt="Initial P" class="initial-thumb">
+                        <span class="initial-text">P</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="q" title="Out of Stock">
+                        <img src="images/q.png" alt="Initial Q" class="initial-thumb">
+                        <span class="initial-text">Q</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="r">
+                        <img src="images/r.png" alt="Initial R" class="initial-thumb">
+                        <span class="initial-text">R</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="s">
+                        <img src="images/s.png" alt="Initial S" class="initial-thumb">
+                        <span class="initial-text">S</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="t">
+                        <img src="images/t.png" alt="Initial T" class="initial-thumb">
+                        <span class="initial-text">T</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="u" title="Out of Stock">
+                        <img src="images/u.png" alt="Initial U" class="initial-thumb">
+                        <span class="initial-text">U</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="v" title="Out of Stock">
+                        <img src="images/v.png" alt="Initial V" class="initial-thumb">
+                        <span class="initial-text">V</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="w" title="Out of Stock">
+                        <img src="images/w.png" alt="Initial W" class="initial-thumb">
+                        <span class="initial-text">W</span>
+                    </div>
+                    <div class="initial-thumb-wrapper out-of-stock" data-initial="x" title="Out of Stock">
+                        <img src="images/x.png" alt="Initial X" class="initial-thumb">
+                        <span class="initial-text">X</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="y">
+                        <img src="images/y.png" alt="Initial Y" class="initial-thumb">
+                        <span class="initial-text">Y</span>
+                    </div>
+                    <div class="initial-thumb-wrapper" data-initial="z">
+                        <img src="images/z.png" alt="Initial Z" class="initial-thumb">
+                        <span class="initial-text">Z</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quantity-selector">
+                <p>Quantity:</p>
+                <div class="quantity-input-group">
+                    <button id="decrement-quantity" class="quantity-btn">-</button>
+                    <input type="number" id="quantity" value="1" min="1" max="99" readonly>
+                    <button id="increment-quantity" class="quantity-btn">+</button>
+                </div>
+            </div>
+
+            <button class="add-to-bag-btn"><i class="fas fa-shopping-bag"></i> Add to Bag</button>
+            <button class="add-to-wishlist-btn"><i class="far fa-heart"></i> Add to Wish List</button>
+
+
+            <div class="you-might-also-like">
+                <h3>You Might Also Like</h3>
+                <div class="related-products">
+                    <div class="related-item">
+                        <img src="images/related product 1.png" alt="Related Product 1">
+                        <p>Product Name</p>
+                        <p>$$$.$$</p>
+                    </div>
+                    <div class="related-item">
+                        <img src="images/related product 2.png" alt="Related Product 2">
+                        <p>Product Name</p>
+                        <p>$$$.$$</p>
+                    </div>
+                    <div class="related-item">
+                        <img src="images/related product 3.png" alt="Related Product 3">
+                        <p>Product Name</p>
+                        <p>$$$.$$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="product-info-sections">
+        <div class="details-care">
+            <h3>Details & Care</h3>
+            <p>Add a little personal flair to your neckline with this puffy initial pendant plated in warm goldtone. Each letter is crafted with meticulous attention to detail, ensuring a unique and elegant piece that reflects your individuality. Perfect for daily wear or as a thoughtful gift.</p>
+        </div>
+
+        <div class="helpful-info">
+            <h4>Helpful Info</h4>
+            <div class="info-cards-container">
+                <div class="info-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h5>Fit Guides</h5>
+                    <p>Explore our comprehensive necklace length guide in the footer to accurately visualize how different lengths will drape on your neckline. Measure a favorite necklace for comparison.</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-soap"></i>
+                    </div>
+                    <h5>Care Instructions</h5>
+                    <p>To preserve radiant shine, avoid direct contact with water, perfumes, lotions, and harsh chemicals. Apply beauty products before putting on your necklace.</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h5>Activity Advisory</h5>
+                    <p>We recommend removing your necklace prior to engaging in any physical activities, showering, swimming, or sleeping to prevent accidental damage or loss.</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h5>Storage Tips</h5>
+                    <p>Store your necklace separately in a soft, dry pouch or a dedicated jewelry box. This prevents tangling and protects it from scratches and oxidation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="shipping-gift-info">
+    <div class="container">
+        <h3>Shipping & Returns</h3>
+        <div class="info-cards-container">
+            <div class="info-card">
+                <div class="icon-circle">
+                    <i class="fas fa-truck"></i> </div>
+                <h5>Free Standard Shipping</h5>
+                <p>Enjoy complimentary standard shipping on all domestic orders, typically delivered within 3-5 business days. Tracking information will be provided.</p>
+            </div>
+            <div class="info-card">
+                <div class="icon-circle">
+                    <i class="fas fa-undo-alt"></i> </div>
+                <h5>60-Day Free Returns</h5>
+                <p>We offer hassle-free returns within 60 days of purchase for a full refund or exchange. Items must be in original, unworn condition with packaging.</p>
+            </div>
+        </div>
+
+        <h3>Gift Options</h3>
+        <div class="info-cards-container">
+            <div class="info-card">
+                <div class="icon-circle">
+                    <i class="fas fa-gift"></i> </div>
+                <h5>Luxury Gift Wrapping</h5>
+                <p>Elevate your gift with our exquisite premium gift wrapping service, available for a small fee at checkout, including a deluxe box and ribbon.</p>
+            </div>
+            <div class="info-card">
+                <div class="icon-circle">
+                    <i class="fas fa-envelope"></i> </div>
+                <h5>Personalized Gift Message</h5>
+                <p>Add a heartfelt, personalized message to your gift. This message will be sent to the recipient's email upon delivery, free of charge.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script src="script.js"></script>
 </body>
 </html>

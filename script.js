@@ -1,191 +1,102 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // const dropdown = document.getElementById('letterDropdown');
-  const mainImage = document.getElementById('jewelryImage');
-  const modal = document.getElementById('modal');
-  const modalImage = document.getElementById('modalImage');
-  const closeButton = document.querySelector('.close-button');
-  const chimeAudio = document.getElementById('chime');
-  const imagePreviewContainer = document.querySelector('.image-preview-container');
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  const body = document.body;
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
 
-  // --- Dark Mode Toggle Logic ---
-  darkModeToggle.addEventListener('change', () => {
-    if (darkModeToggle.checked) {
-      body.classList.add('dark-mode');
-      localStorage.setItem('theme', 'dark');
+    // Check for saved theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Change icon to sun for dark mode
+        themeToggle.title = 'Switch to Light Mode';
     } else {
-      body.classList.remove('dark-mode');
-      localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Change icon to moon for light mode
+        themeToggle.title = 'Switch to Dark Mode';
     }
-  });
 
-  // Check for saved theme preference
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    body.classList.add('dark-mode');
-    darkModeToggle.checked = true;
-  } else {
-    body.classList.remove('dark-mode');
-    darkModeToggle.checked = false; // Ensure it's unchecked for light mode
-  }
-
-  // --- Letter Block Selector Logic ---
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  const unavailableLetters = ['b','e','i','l','n','q','u','v','w','x'];
-  const letterBlocksContainer = document.getElementById('letterBlocksContainer');
-  let selectedLetter = 'a';
-
-  // Helper to create letter blocks
-  function createLetterBlocks() {
-    letterBlocksContainer.innerHTML = '';
-    letters.forEach(letter => {
-      const lower = letter.toLowerCase();
-      const block = document.createElement('div');
-      block.className = 'letter-block';
-      block.tabIndex = 0;
-      block.textContent = letter;
-      block.setAttribute('data-letter', lower);
-
-      if (unavailableLetters.includes(lower)) {
-        block.classList.add('unavailable');
-        block.tabIndex = -1;
-        // No click or keyboard event for unavailable
-      } else {
-        if (lower === selectedLetter) {
-          block.classList.add('selected');
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            themeToggle.title = 'Switch to Light Mode';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            themeToggle.title = 'Switch to Dark Mode';
         }
-        // Click event
-        block.addEventListener('click', () => {
-          selectLetter(lower);
-        });
-        // Keyboard accessibility
-        block.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            selectLetter(lower);
-          }
-        });
-      }
-      letterBlocksContainer.appendChild(block);
     });
-  }
 
-  function selectLetter(letter) {
-    selectedLetter = letter;
-    // Update selected class
-    Array.from(letterBlocksContainer.children).forEach(block => {
-      block.classList.toggle('selected', block.getAttribute('data-letter') === letter);
+    // Product Initial Selector Logic
+    const initialThumbs = document.querySelectorAll('.initial-thumb-wrapper');
+    const mainProductImage = document.getElementById('main-product-image');
+    const selectedInitialSpan = document.getElementById('selected-initial');
+    const productMainTitle = document.getElementById('product-main-title'); // Get the product title
+
+    initialThumbs.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+            // Prevent selection if out of stock
+            if (thumb.classList.contains('out-of-stock')) {
+                return;
+            }
+
+            // Remove 'selected' class from all thumbs
+            initialThumbs.forEach(t => t.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked thumb
+            thumb.classList.add('selected');
+
+            // Update main image and selected initial text
+            const initial = thumb.dataset.initial;
+            mainProductImage.src = `images/${initial}.png`;
+            selectedInitialSpan.textContent = initial.toUpperCase(); // Update the displayed initial
+            productMainTitle.textContent = `Bubble Initial Pendant Necklace - ${initial.toUpperCase()}`; // Update title
+        });
     });
-    updateProductImage(letter);
-    playChime();
-  }
 
-  // Set default value to A and update image
-  createLetterBlocks();
-  updateProductImage(selectedLetter);
+    // Quantity Selector Logic
+    const decrementBtn = document.getElementById('decrement-quantity');
+    const incrementBtn = document.getElementById('increment-quantity');
+    const quantityInput = document.getElementById('quantity');
 
-  // --- Event Listeners ---
+    decrementBtn.addEventListener('click', () => {
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > parseInt(quantityInput.min)) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
 
-  // Handle main image click for modal
-  imagePreviewContainer.addEventListener('click', () => {
-    modal.style.display = 'flex';
-    modalImage.src = mainImage.src;
-    modalImage.alt = mainImage.alt;
-  });
+    incrementBtn.addEventListener('click', () => {
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue < parseInt(quantityInput.max)) {
+            quantityInput.value = currentValue + 1;
+        }
+    });
 
-  // Handle close button click for modal
-  closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+    // --- New: Hamburger Menu Toggle Logic ---
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const navList = document.getElementById('nav-list');
 
-  // Close modal when clicking outside the image
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
+    if (hamburgerMenu && navList) {
+        hamburgerMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
 
-  // Keyboard accessibility for modal
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && modal.style.display === 'flex') {
-      modal.style.display = 'none';
-    }
-  });
-
-  // --- Helper Functions ---
-
-  function updateProductImage(letter) {
-    mainImage.style.opacity = '0'; // Start fade out
-    mainImage.style.transform = 'scale(0.9)'; // Shrink for animation
-    setTimeout(() => {
-      mainImage.src = `images/${letter}.png`;
-      mainImage.alt = `Bubble Initial Necklace for ${letter.toUpperCase()}`;
-      mainImage.style.opacity = '1'; // Fade in
-      mainImage.style.transform = 'scale(1)'; // Expand for animation
-    }, 300); // Match this with CSS transition time
-  }
-
-  function playChime() {
-    if (chimeAudio) {
-      chimeAudio.currentTime = 0; // Rewind to start if already playing
-      chimeAudio.play().catch(e => console.log("Audio play prevented:", e)); // Catch potential user gesture errors
-    }
-  }
-
-  // --- Animation Observer ---
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Apply animate-in to observed elements
-        entry.target.classList.add('animate-in');
-
-        // Special handling for staggered animations within grids/containers
-        if (entry.target.classList.contains('info-cards-grid')) {
-          const cards = entry.target.querySelectorAll('.animated-card');
-          cards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.1}s`;
-            card.classList.add('animate-in');
-          });
-        } else if (entry.target.classList.contains('two-point-info-container')) {
-            const boxes = entry.target.querySelectorAll('.animated-box');
-            boxes.forEach((box, index) => {
-                box.style.animationDelay = `${index * 0.1}s`;
-                box.classList.add('animate-in');
+        // Close menu if a link is clicked (optional, but good for UX)
+        navList.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navList.classList.contains('active')) {
+                    navList.classList.remove('active');
+                }
             });
-        }
-        observer.unobserve(entry.target); // Stop observing once animated
-      }
-    });
-  }, {
-    threshold: 0.1, // Trigger when 10% of the element is visible
-    rootMargin: '0px 0px -50px 0px' // Adjust to trigger slightly before element reaches viewport bottom
-  });
+        });
 
-  // Observe elements that need scroll animations
-  document.querySelectorAll(
-    '.animated-subheading, .animated-text, .info-cards-grid, .two-point-info-container' // Observe containers
-  ).forEach(el => {
-    // Initial opacity/transform set in CSS for .animated-card and .animated-box
-    // No need to set opacity: 0 here if already handled by CSS classes
-    observer.observe(el);
-  });
-
-
-  // Add the animate-in class to the main info section after a short delay
-  const infoSection = document.querySelector('.animated-info');
-  if (infoSection) {
-    setTimeout(() => {
-      infoSection.classList.add('animate-in');
-    }, 500); // Delay for info to animate after image
-  }
-
-  // Add a simple animation to the product gallery on load
-  const productGallery = document.querySelector('.product-gallery');
-  if (productGallery) {
-    setTimeout(() => {
-      productGallery.classList.add('animate-in');
-    }, 300); // Delay for image to animate
-  }
-
+        // Close menu if clicking outside (optional, but good for UX)
+        document.addEventListener('click', (event) => {
+            if (!navList.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+                if (navList.classList.contains('active')) {
+                    navList.classList.remove('active');
+                }
+            }
+        });
+    }
 });
