@@ -991,3 +991,418 @@ a:hover {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
 }
+@media (max-width: 767px) {
+    .site-logo {
+        height: 20px; /* Even smaller logo on mobile */
+    }
+    .footer-logo {
+        height: 15px;
+    }
+}
+.site-logo {
+    height: 45px; /* Decreased from 35px to make it smaller */
+    width: auto;
+    display: block; /* Remove extra space below image */
+}
+
+.footer-logo {
+    height: 20px; /* You might want to make the footer logo smaller too */
+    width: auto;
+    margin-bottom: 10px;
+}
+/* --- Footer Styles --- */
+.site-footer {
+    background-color: var(--header-bg); /* Use header background for footer */
+    color: var(--text-color);
+    padding: 40px 20px 20px;
+    border-top: 1px solid var(--header-border);
+    font-size: 14px;
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Allow columns to wrap on smaller screens */
+    gap: 20px; /* Space between columns */
+}
+
+.footer-column {
+    flex: 1; /* Distribute space evenly */
+    min-width: 180px; /* Minimum width before wrapping */
+    margin-bottom: 20px;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    color: var(--text-color);
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.footer-column ul li a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.subscribe-column {
+    flex-basis: 300px; /* Give subscribe column a fixed width */
+    max-width: 350px;
+}
+
+.subscribe-column p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.subscribe-form {
+    display: flex;
+    flex-direction: column; /* Stack input and button */
+    gap: 10px;
+}
+
+.subscribe-form input {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--product-card-bg); /* Match product card background */
+    color: var(--text-color);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subscribe-form .main-button {
+    background-color: #8B9A45; /* Darker green from image */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.subscribe-form .main-button:hover {
+    background-color: #6C7A3C; /* Darker green on hover */
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--header-border);
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 15px; /* Space when wrapped */
+}
+
+.footer-bottom .copyright p {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.7;
+    
+}
+
+.footer-bottom .payment-methods img {
+    height: 25px; /* Adjust as needed */
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Dark mode footer adjustments */
+body.dark-mode .subscribe-form .main-button {
+    background-color: #FFD700; /* Gold for dark mode */
+    color: #333; /* Dark text on gold */
+}
+
+body.dark-mode .subscribe-form .main-button:hover {
+    background-color: #E6C200; /* Darker gold on hover */
+}
+/* Product Images on Mobile (Carousel Effect) */
+@media (max-width: 767px) {}
+    
+    .product-images {
+        padding-right: 0;
+        margin-bottom: 20px;
+        min-width: unset;
+        width: 100%; /* Take full width on mobile */
+    }
+
+    /* Main Product Image Container - make it a full swipeable item */
+    .main-product-image-container {
+        width: 100%; /* Take full width of its parent */
+        max-height: 400px; /* Limit height */
+        overflow: hidden; /* Hide overflow if image is too large */
+        display: flex; /* To center content */
+        justify-content: center;
+        align-items: center;
+        background-color: var(--product-card-bg); /* Match other elements */
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-bottom: 15px; /* Space below it */
+    }
+
+    .main-product-image-container img,
+    .main-product-image-container video {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        object-fit: contain; /* Ensure the whole image is visible here */
+    }
+
+    .image-carousel-mobile {
+        display: flex; /* Enable flex for horizontal scroll */
+        overflow-x: scroll; /* Enable horizontal scrolling */
+        scroll-snap-type: x mandatory; /* Snap to items */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        gap: 15px; /* Space between carousel items */
+        padding-bottom: 10px; /* Space for scrollbar */
+        padding-left: 20px; /* Padding for first item to start from left */
+        padding-right: 20px; /* Padding for last item to end at right */
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
+
+    .image-carousel-mobile > div { /* Apply to direct children that are items */
+        flex-shrink: 0; /* Prevent items from shrinking */
+        width: 90%; /* Each item takes 90% of the viewport width */
+        max-width: 400px; /* Limit max width of carousel item */
+        scroll-snap-align: center; /* Snap to center of item */
+    }
+    /* Product Images on Mobile (Carousel Effect) */
+@media (max-width: 767px) {
+    .product-images {
+        padding-right: 0;
+        margin-bottom: 20px;
+        min-width: unset;
+        width: 100%; /* Take full width on mobile */
+    }
+
+    /* Main Product Image Container - make it a full swipeable item */
+    .main-product-image-container {
+        width: 100%; /* Take full width of its parent */
+        max-height: 400px; /* Limit height */
+        overflow: hidden; /* Hide overflow if image is too large */
+        display: flex; /* To center content */
+        justify-content: center;
+        align-items: center;
+        background-color: var(--product-card-bg); /* Match other elements */
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-bottom: 15px; /* Space below it */
+    }
+
+    .main-product-image-container img,
+    .main-product-image-container video {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        object-fit: contain; /* Ensure the whole image is visible here */
+    }
+
+    .image-carousel-mobile {
+        display: flex; /* Enable flex for horizontal scroll */
+        overflow-x: scroll; /* Enable horizontal scrolling */
+        scroll-snap-type: x mandatory; /* Snap to items */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        gap: 15px; /* Space between carousel items */
+        padding-bottom: 10px; /* Space for scrollbar */
+        padding-left: 20px; /* Padding for first item to start from left */
+        padding-right: 20px; /* Padding for last item to end at right */
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
+
+    .image-carousel-mobile > div { /* Apply to direct children that are items */
+        flex-shrink: 0; /* Prevent items from shrinking */
+        width: 90%; /* Each item takes 90% of the viewport width */
+        max-width: 400px; /* Limit max width of carousel item */
+        scroll-snap-align: center; /* Snap to center of item */
+    }
+/* General Mobile UI Sleekness */
+@media (max-width: 767px) {
+    body {
+        -webkit-text-size-adjust: 100%; /* Prevent text zooming */
+    }
+
+    .header-left .logo {
+        font-size: 20px;
+    }
+
+    .search-bar {
+        border-radius: 6px;
+    }
+    .search-bar input {
+        padding: 10px;
+        font-size: 15px;
+    }
+    .search-bar button {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .nav-list li a {
+        font-size: 15px;
+    }
+
+    .product-page {
+        padding: 10px; /* Reduced padding on product page */
+        margin: 10px auto;
+    }
+
+    .product-title h2 {
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+    .product-title .brand {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+    .price {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .color-options p, .quantity-selector p {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .initial-selector {
+        gap: 6px; /* Slightly tighter grid for initials */
+        margin-bottom: 10px;
+    }
+    .initial-thumb-wrapper {
+        width: 45px; /* Slightly smaller initial boxes */
+        height: 45px;
+    }
+    .initial-thumb-wrapper .initial-text {
+        font-size: 20px; /* Adjusted font size for text initials */
+    }
+    .initial-thumb-wrapper.out-of-stock .initial-text {
+        font-size: 20px; /* Adjusted font size for out of stock */
+    }
+
+    .quantity-input-group {
+        margin-bottom: 15px;
+    }
+    .quantity-input-group .quantity-btn,
+    .quantity-input-group input {
+        height: 38px; /* Slightly smaller height for quantity controls */
+        font-size: 15px;
+    }
+
+    .add-to-bag-btn,
+    .add-to-wishlist-btn {
+        padding: 12px 15px;
+        font-size: 15px;
+        gap: 8px;
+    }
+
+    .you-might-also-like h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .related-products {
+        justify-content: flex-start; /* Align left for scrollable section */
+        overflow-x: scroll; /* Enable horizontal scroll for related items */
+        scroll-snap-type: x mandatory;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .related-item {
+        flex-shrink: 0;
+        width: 80px; /* Keep consistent width */
+        scroll-snap-align: start;
+    }
+    .related-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .product-info-sections,
+    .shipping-gift-info {
+        padding: 15px;
+        margin: 15px auto;
+    }
+    .details-care h3, .helpful-info h4, .shipping-gift-info h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .details-care p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    .info-cards-container {
+        gap: 15px;
+    }
+    .info-card {
+        padding: 15px;
+    }
+    .info-card .icon-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+    .info-card h5 {
+        font-size: 16px;
+    }
+    .info-card p {
+        font-size: 13px;
+    }
+
+    /* Footer adjustments for mobile */
+    .footer-columns {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 0; /* Remove gap when stacked */
+    }
+    .footer-column {
+        min-width: unset; /* Remove min-width */
+        width: 100%;
+        margin-bottom: 20px; /* Space between stacked columns */
+    }
+    .footer-column:last-child {
+        margin-bottom: 0;
+    }
+    .subscribe-column {
+        flex-basis: auto; /* Allow it to take full width */
+        max-width: 100%;
+    }
+    .footer-bottom {
+        flex-direction: column; /* Stack copyright and payments */
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+    .footer-bottom .payment-methods {
+        margin-top: 10px;
+        display: flex; /* Keep payment methods in a row */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    .footer-bottom .payment-methods img {
+        margin-left: 5px; /* Adjust margin between payment icons */
+    }
+  }
+}
